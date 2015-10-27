@@ -25,6 +25,8 @@ namespace TheCookieBakery
 			_productionTime = new Stopwatch();
 			_productionTime.Start();
 			_cookieOnHold = new object();
+//			_count = 1;	// Uncomment it if you want to start numbering of cookies from 1 (not from 0)
+						// NB! It will reduce the production by 1.
 		}
 
 		public void MakeCookie()
@@ -62,14 +64,16 @@ namespace TheCookieBakery
 			}
 		}
 
-		public void SellCookieTo(Customer customer)
+		public bool SellCookieTo(Customer customer)
 		{
 				lock (_cookieOnHold) {
-					if (BasketIsEmpty()) return;
+					if (BasketIsEmpty()) return false;
 					Console.WriteLine("\t\t\t" + customer.GetName() + " received " +
 									  _basket.Dequeue().GetDescription() + " #" 
 									  + _numbers.Dequeue());
-				}	
+					if (BakeryIsClosed()) Console.WriteLine("\n\t Checkout:");
+					return true;
+				}
 		}
 
 		public bool BasketIsEmpty()
