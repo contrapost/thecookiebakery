@@ -76,5 +76,10 @@ namespace TheCookieBakery
 		{
 			return _basket.Count() == 0;
 		}
+
+		public bool BakeryIsClosed()
+		{
+			return _basket.Count() == 0 && _count == _dailyProduction;
+		}
 	}
 }
