@@ -46,7 +46,7 @@ namespace TheCookieBakery
 			while (true)
 			{
 				if (Delay.ElapsedMilliseconds <= 950) continue;
-				if (Bakery.BasketIsEmpty()) return;
+				if (Bakery.BakeryIsClosed()) return;
 				Bakery.SellCookieTo(customer);
 				Delay.Restart();
 			}
