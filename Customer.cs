@@ -2,16 +2,11 @@
 {
 	public class Customer
 	{
-		private readonly string _name;
+		public string Name { get; }
 
 		public Customer(string name)
 		{
-			_name = name;
-		}
-
-		public string GetName()
-		{
-			return _name;
+			Name = name;
 		}
 	}
 }
