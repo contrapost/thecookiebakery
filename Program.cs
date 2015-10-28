@@ -12,6 +12,7 @@ namespace TheCookieBakery
 
 		public static void Main(string[] args)
 		{
+			Console.Title = "The Cookie Bakery";
 			// starts the timer
 			Delay.Start();
 
