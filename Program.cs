@@ -70,7 +70,7 @@ namespace TheCookieBakery
 				if (Delay.ElapsedMilliseconds <= 950) continue;
 				if (Bakery.BakeryIsClosed())
 				{
-					Console.WriteLine("\t\t " + customer.GetName() + 
+					Console.WriteLine("\t\t " + customer.Name + 
 						" has bought " + count + " cookies.");
 					return;
 				}
