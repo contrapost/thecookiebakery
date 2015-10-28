@@ -68,7 +68,7 @@ namespace TheCookieBakery
 		{
 				lock (_cookieOnHold) {
 					if (BasketIsEmpty()) return false;
-					Console.WriteLine("\t\t\t" + customer.GetName() + " received " +
+					Console.WriteLine("\t\t\t" + customer.Name + " received " +
 									  _basket.Dequeue().GetDescription() + " #" 
 									  + _numbers.Dequeue());
 					if (BakeryIsClosed()) Console.WriteLine("\n\t Checkout:");
