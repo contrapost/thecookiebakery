@@ -7,7 +7,7 @@ namespace TheCookieBakery
 	class Program
 	{
 
-		static readonly TheBakery Bakery = new TheBakery(21);
+		static readonly TheBakery Bakery = new TheBakery(21, 667);
 		static readonly Stopwatch Delay = new Stopwatch();
 
 		public static void Main(string[] args)
@@ -57,7 +57,7 @@ namespace TheCookieBakery
 		/// <summary>
 		/// Each "customer"-thread has this method as main. The method waits in 950 milliseconds
 		/// and calls the SellCookieTo method from TheBakery object if the instance of TheBakery object
-		/// still has cookies or has to produce more cookies (check in BakeryIsClosed method). 
+		/// still has cookies or has to produce more cookies (checks by BakeryIsClosed method). 
 		/// To ensure next attempt the method restarts the timer. 
 		/// If there are no cookies and the bakery isn't producing more the methods writes to the console
 		/// the amount of the cookies the customer has bought.
