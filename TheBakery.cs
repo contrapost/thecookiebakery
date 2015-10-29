@@ -7,44 +7,57 @@ namespace TheCookieBakery
 {
 	class TheBakery
 	{
-
-		private readonly Queue<ICookie> _basket;
-		private readonly Queue<int> _numbers;
+		public int DailyProduction { get; }  
+		public double ProductionTime { get; } 							  
+		private readonly Queue<ICookie> _basket;  // _basket and _numbers queues can be replaced 
+		private readonly Queue<int> _numbers;	 // by Dictionary, but in this case the order of numbers 
+												//  of cookiesthat are bought by customers can vary. 
 		private CookieType _cookieType;
-		private readonly int _dailyProduction;
-		private readonly Stopwatch _productionTime;
-		private readonly object _cookieOnHold;
+		private readonly Stopwatch _timer;
+		private readonly object _lockBacket;
 		private int _count;
 
-		public TheBakery(int dailyProduction)
+		/// <summary>
+		/// Constructor with initialization of fields
+		/// </summary>
+		/// <param name="dailyProduction">amount of cookies that bakery should to produce</param>
+		/// <param name="productionTime">time that bakery needs to produce one cookie</param>
+		public TheBakery(int dailyProduction, double productionTime)
 		{
 			_basket = new Queue<ICookie>();
 			_numbers = new Queue<int>();
 			_cookieType = CookieType.Usual;
-			_dailyProduction = dailyProduction;
-			_productionTime = new Stopwatch();
-			_productionTime.Start();
-			_cookieOnHold = new object();
+			DailyProduction = dailyProduction;
+			ProductionTime = productionTime;
+			_timer = new Stopwatch();
+			_timer.Start();
+			_lockBacket = new object();
 //			_count = 1;	// Uncomment it if you want to start numbering of cookies from 1 (not from 0)
 						// NB! It will reduce the production by 1.
 		}
 
+		/// <summary>
+		/// Makes cookies with delay (ProductionTime) untill the daily production is acheived.
+		/// Uses ChooseCookie method to vary the cookie types.
+		/// </summary>
 		public void MakeCookie()
 		{
-			while (_count < _dailyProduction)
+			while (_count < DailyProduction)
 			{
-				if (_productionTime.ElapsedMilliseconds <= 677) continue;
+				if (_timer.ElapsedMilliseconds <= ProductionTime) continue;
 				var cookie = ChooseCookie();
 				_basket.Enqueue(cookie);
 				_numbers.Enqueue(_count);
 				Console.WriteLine("Bakery made " + cookie.GetDescription() + " #" + _count);
 				_count++;
-				_productionTime.Restart();
+				_timer.Restart();
 			}
 		}
 
-	
-
+		/// <summary>
+		/// Returns ICookie object of different types depends on previous type
+		/// </summary>
+		/// <returns>ICookie</returns>
 		private ICookie ChooseCookie()
 		{
 			ICookie cookie = new UsualCookie();
@@ -64,9 +77,15 @@ namespace TheCookieBakery
 			}
 		}
 
+		/// <summary>
+		/// Remove the cookie (number and name) from queues and writesthe name of customer 
+		/// who "gets" it with information about the cookie.
+		/// </summary>
+		/// <param name="customer">Instance of Customer object</param>
+		/// <returns>True if customer "got" a cookie or false if not.</returns>
 		public bool SellCookieTo(Customer customer)
 		{
-				lock (_cookieOnHold) {
+				lock (_lockBacket) {
 					if (BasketIsEmpty()) return false;
 					Console.WriteLine("\t\t\t" + customer.Name + " received " +
 									  _basket.Dequeue().GetDescription() + " #" 
@@ -83,7 +102,7 @@ namespace TheCookieBakery
 
 		public bool BakeryIsClosed()
 		{
-			return _basket.Count() == 0 && _count == _dailyProduction;
+			return _basket.Count() == 0 && _count == DailyProduction;
 		}
 	}
 }
