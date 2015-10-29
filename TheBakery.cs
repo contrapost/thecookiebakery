@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TheCookieBakery
 {
-	class TheBakery
+	public class TheBakery
 	{
 		public int DailyProduction { get; }  
 		public double ProductionTime { get; } 							  
