@@ -1,83 +1,41 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
+﻿using System.Collections.Generic;
 
 namespace TheCookieBakery
 {
 	class Program
 	{
-
-		static readonly TheBakery Bakery = new TheBakery(21, 667);
-		static readonly Stopwatch Delay = new Stopwatch();
-
 		public static void Main(string[] args)
 		{
-			Console.Title = "The Cookie Bakery";
-			// starts the timer
-			Delay.Start();
+			// Initializing of a bakery object with the number of cookies to produce 
+			// and production time in milliseconds
+			var bakery = new TheBakery(21, 667);
 
-			// initialization of local variables
-			var fredTheCustomer = new Customer("Fred");
-			var tedTheCustomer = new Customer("Ted");
-			var gregTheCustomer = new Customer("Greg");
+			// Initializing of the time period for each attempt to get a cookie.
+			// Now this value is common for all customers, but it can be set individualy
+			// for each customer
+			var waitingTime = 1000.0;
 
-			var threads = new Thread[4];
-			threads[0] = new Thread(Bakery.MakeCookie);
-			threads[1] = new Thread(delegate () { TryToBuy(fredTheCustomer); });
-			threads[2] = new Thread(delegate () { TryToBuy(tedTheCustomer); });
-			threads[3] = new Thread(delegate () { TryToBuy(gregTheCustomer); });
+			// Initializing of customers with name and waiting time. 
+			var fredTheCustomer = new Customer("Fred", waitingTime);
+			var tedTheCustomer = new Customer("Ted", waitingTime);
+			var gregTheCustomer = new Customer("Greg", waitingTime);
 
-			// starts the threads
-			for (var i = 0; i < 4; i++)
+			// Uncomment next line and respective text in the line 31 to add Maggie as a customer.
+			// var maggieTheCustomer = new Customer("Maggie", waitingTime); 
+
+			// To add new cusomers initialize them with name and waitingTime and "put" them
+			// into the list.
+
+			var customers = new List<Customer>
 			{
-				threads[i].Start();
-			}
+				fredTheCustomer, tedTheCustomer, gregTheCustomer /*, maggieTheCustomer */
+			};
 
-			// waits for the threads are done
-			for (var i = 0; i < 4; i++) {
-				threads[i].Join();
-			}
+			// Initializing of a bakery controller object that proceed with multithreading
+			// and visualization of the output.
+			var bc = new BakeryController(bakery, customers);
+			bc.Start();
 
-			// waits for the user to close the console
-			Pause();
-
-		}
-
-		/// <summary>
-		/// To wait for the user to close the program
-		/// </summary>
-		private static void Pause()
-		{
-//			Console.ForegroundColor = ConsoleColor.DarkRed; // Uncomment to change the color 
-															//of the final prompt
-			Console.WriteLine("\nPress any key to close the bakery...");
-			Console.ReadKey(true);
-		}
-
-		/// <summary>
-		/// Each "customer"-thread has this method as main. The method waits in 950 milliseconds
-		/// and calls the SellCookieTo method from TheBakery object if the instance of TheBakery object
-		/// still has cookies or has to produce more cookies (checks by BakeryIsClosed method). 
-		/// To ensure next attempt the method restarts the timer. 
-		/// If there are no cookies and the bakery isn't producing more the methods writes to the console
-		/// the amount of the cookies the customer has bought.
-		/// </summary>
-		/// <param name="customer">Concrete customer who tries to buy a cookie</param>
-		private static void TryToBuy(Customer customer)
-		{
-			var count = 0;
-			while (true)
-			{
-				if (Delay.ElapsedMilliseconds <= 950) continue;
-				if (Bakery.BakeryIsClosed())
-				{
-					Console.WriteLine("\t\t " + customer.Name + 
-						" has bought " + count + " cookies.");
-					return;
-				}
-				if(Bakery.SellCookieTo(customer)) count++;
-				Delay.Restart();
-			}
 		}
 	}
 }
