@@ -30,10 +30,10 @@ namespace TheCookieBakery
 				fredTheCustomer, tedTheCustomer, gregTheCustomer /*, maggieTheCustomer */
 			};
 
-			// Initializing of a bakery controller object that proceed with multithreading
+			// Initializing of a bakery controller object that proceeds with multithreading
 			// and visualization of the output.
 			var bc = new BakeryController(bakery, customers);
-			bc.Start();
+			bc.MakeItWork();
 		}
 	}
 }
