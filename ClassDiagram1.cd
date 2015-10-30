@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="TheCookieBakery.AlmondDecorator">
-    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AlmondDecorator.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TheCookieBakery.BakeryController">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAAAAAAAAAAABAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>BakeryController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TheCookieBakery.ChocolateDecorator">
-    <Position X="2.75" Y="3" Width="1.5" />
+    <Position X="5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ChocolateDecorator.cs</FileName>
@@ -23,35 +30,42 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="TheCookieBakery.Customer">
-    <Position X="8.75" Y="3" Width="1.5" />
+    <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAABAAAAAAAMAAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TheCookieBakery.Program">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+  <Class Name="TheCookieBakery.Gui">
+    <Position X="10.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAIAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gui.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheCookieBakery.Program">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheCookieBakery.RaisinDecorator">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="2.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RaisinDecorator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheCookieBakery.TheBakery">
-    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAigAAAAIEAAAgBAAAAAAAAAAAAAAEACAAAAABAA=</HashCode>
+      <HashCode>AAAAAigAAAAgAAAAgBAAAgAAAAAAAAAAEACAAEABAAE=</HashCode>
       <FileName>TheBakery.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheCookieBakery.UsualCookie" BaseTypeListCollapsed="true">
-    <Position X="4.75" Y="2.75" Width="1.5" />
+    <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UsualCookie.cs</FileName>
@@ -59,14 +73,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Interface Name="TheCookieBakery.ICookie">
-    <Position X="0.75" Y="2.25" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ICookie.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="TheCookieBakery.CookieType">
-    <Position X="0.75" Y="3.5" Width="1.5" />
+    <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAgAQAQAAAAAAAAAAAA=</HashCode>
       <FileName>CookieType.cs</FileName>
