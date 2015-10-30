@@ -11,17 +11,17 @@ namespace TheCookieBakery
 		public double ProductionTime { get; } 							  
 		private readonly Queue<ICookie> _basket;  // _basket and _numbers queues can be replaced 
 		private readonly Queue<int> _numbers;	 // by Dictionary, but in this case the order of numbers 
-												//  of cookiesthat are bought by customers can vary. 
+												//  of cookies that are bought by customers can vary. 
 		private CookieType _cookieType;
 		private readonly Stopwatch _timer;
 		private readonly object _lockBacket;
 		private int _count;
 
 		/// <summary>
-		/// Constructor with initialization of fields
+		/// Constructor with initialization of the fields
 		/// </summary>
-		/// <param name="dailyProduction">amount of cookies that bakery should to produce</param>
-		/// <param name="productionTime">time that bakery needs to produce one cookie</param>
+		/// <param name="dailyProduction">int, amount of cookies that bakery should produce</param>
+		/// <param name="productionTime">double, time that bakery needs to produce one cookie</param>
 		public TheBakery(int dailyProduction, double productionTime)
 		{
 			_basket = new Queue<ICookie>();
@@ -33,7 +33,7 @@ namespace TheCookieBakery
 			_timer.Start();
 			_lockBacket = new object();
 //			_count = 1;	// Uncomment it if you want to start numbering of cookies from 1 (not from 0)
-						// NB! It will reduce the production by 1.
+						// NB! It will reduce the production amount by 1.
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace TheCookieBakery
 		}
 
 		/// <summary>
-		/// Returns ICookie object of different types depends on previous type
+		/// Returns ICookie object of different types depends on previous type.
 		/// </summary>
 		/// <returns>ICookie</returns>
 		private ICookie ChooseCookie()
@@ -78,8 +78,10 @@ namespace TheCookieBakery
 		}
 
 		/// <summary>
-		/// Remove the cookie (number and name) from queues and writesthe name of customer 
-		/// who "gets" it with information about the cookie.
+		/// Remove the cookie (number and name) from queues and writes the name of a customer 
+		/// who "gets" it with information about the cookie. The method uses a lock object to ensure
+		/// that only one thread can execute the critical part of the code (i.e. only one customer
+		/// can get a concrete cookie).
 		/// </summary>
 		/// <param name="customer">Instance of Customer object</param>
 		/// <returns>True if customer "got" a cookie or false if not.</returns>
