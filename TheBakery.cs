@@ -12,7 +12,7 @@ namespace TheCookieBakery
 		private readonly Queue<ICookie> _basket;  // _basket and _numbers queues can be replaced 
 		private readonly Queue<int> _numbers;	 // by Dictionary, but in this case the order of numbers 
 												//  of cookies that are bought by customers can vary. 
-		private CookieType _cookieType;
+		private CookieTypes _cookieType;
 		private readonly Stopwatch _timer;
 		private readonly object _lockBacket;
 		private int _count;
@@ -26,7 +26,7 @@ namespace TheCookieBakery
 		{
 			_basket = new Queue<ICookie>();
 			_numbers = new Queue<int>();
-			_cookieType = CookieType.Usual;
+			_cookieType = CookieTypes.Usual;
 			DailyProduction = dailyProduction;
 			ProductionTime = productionTime;
 			_timer = new Stopwatch();
@@ -62,17 +62,17 @@ namespace TheCookieBakery
 		{
 			ICookie cookie = new UsualCookie();
 			switch (_cookieType) {
-				case CookieType.Raisin:
-					_cookieType = CookieType.Chocolate;
+				case CookieTypes.Raisin:
+					_cookieType = CookieTypes.Chocolate;
 					return new RaisinDecorator(cookie);
-				case CookieType.Chocolate:
-					_cookieType = CookieType.Almond;
+				case CookieTypes.Chocolate:
+					_cookieType = CookieTypes.Almond;
 					return new ChocolateDecorator(cookie);
-				case CookieType.Almond:
-					_cookieType = CookieType.Usual;
+				case CookieTypes.Almond:
+					_cookieType = CookieTypes.Usual;
 					return new AlmondDecorator(cookie);
 				default:
-					_cookieType = CookieType.Raisin;
+					_cookieType = CookieTypes.Raisin;
 					return cookie;
 			}
 		}
