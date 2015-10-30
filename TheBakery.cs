@@ -78,7 +78,7 @@ namespace TheCookieBakery
 		}
 
 		/// <summary>
-		/// Remove the cookie (number and name) from queues and writes the name of a customer 
+		/// Removes the cookie (number and name) from queues and writes the name of a customer 
 		/// who "gets" it with information about the cookie. The method uses a lock object to ensure
 		/// that only one thread can execute the critical part of the code (i.e. only one customer
 		/// can get a concrete cookie).
