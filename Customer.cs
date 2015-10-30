@@ -6,14 +6,21 @@ namespace TheCookieBakery
 	public class Customer
 	{
 		public string Name { get; }
-		static readonly Stopwatch Delay = new Stopwatch();
+		// Common timer for all instance of the class
+		static readonly Stopwatch Timer = new Stopwatch();
 		public double WaitingTime { get; }
 
+		/// <summary>
+		/// Constructor initializes name of a customer and time that customer should wait before
+		/// the next attempt to get a cookie.
+		/// </summary>
+		/// <param name="name">Sting that contains the name of customer</param>
+		/// <param name="waitingTime">Double that determine the waiting time</param>
 		public Customer(string name, double waitingTime)
 		{
 			Name = name;
 			WaitingTime = waitingTime;
-            Delay.Start();
+            Timer.Start();
         }
 
 		/// <summary>
@@ -24,19 +31,19 @@ namespace TheCookieBakery
 		/// If there are no cookies and the bakery isn't producing more the methods writes to the console
 		/// the amount of the cookies the customer has bought.
 		/// </summary>
-		/// <param name="bakery"></param>
+		/// <param name="bakery">Instance of TheBakery class</param>
 		public void TryToBuy(TheBakery bakery)
 		{
 			var count = 0;
 			while (true) {
-				if (Delay.ElapsedMilliseconds <= WaitingTime) continue;
+				if (Timer.ElapsedMilliseconds <= WaitingTime) continue;
 				if (bakery.BakeryIsClosed()) {
 					Console.WriteLine("\t\t " + Name +
 						" has bought " + count + " cookies.");
 					return;
 				}
 				if (bakery.SellCookieTo(this)) count++;
-				Delay.Restart();
+				Timer.Restart();
 			}
 		}
 	}
