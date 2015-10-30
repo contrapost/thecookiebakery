@@ -16,33 +16,37 @@ namespace TheCookieBakery
 			_customers = customers;
 		}
 
-		public void Start()
+		/// <summary>
+		/// Sets the primitive gui features (text color and console title), deals with
+		/// multithreading and interaction with user regarding closing of the console.
+		/// </summary>
+		public void MakeItWork()
 		{
 			// Can be used to change the title of the console and the text color.
 			Gui.MakeGui("The Cookie Bakery", ConsoleColor.White);
 
 			// This part of the code deals with multithreading.
 			#region Multithreading
-			// initialization of the araay of threads
+			// initialization of the array of threads
 			var threads = new Thread[_customers.Count + 1];
 
 			// initialization of the bakery-thread
 			threads[0] = new Thread(_bakery.MakeCookie);
 
-			// initialization of customer-threads
+			// initialization of customer-threads using lambda expression that allows sending of parameter
             for (var i = 1; i < threads.Length; i++)
 			{
 				var index = i;
-				threads[i] = new Thread(delegate () { _customers.ElementAt(index - 1).TryToBuy(_bakery); });
+				threads[i] = new Thread(() => { _customers.ElementAt(index - 1).TryToBuy(_bakery); });
 			}
 
-			// start of the threads
+			// starts of the threads
 			foreach (var t in threads)
 			{
 				t.Start();
 			}
 
-			// wait untill of threads are done
+			// waits untill the threads are done
 			foreach (var t in threads) {
 				t.Join();
 			}
